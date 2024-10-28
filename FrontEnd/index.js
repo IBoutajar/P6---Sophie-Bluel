@@ -1,5 +1,4 @@
 // Variable //
-
 const reponse = await fetch ('http://localhost:5678/api/works') ;
 const works = await reponse.json() ;
 
@@ -62,3 +61,13 @@ btnDefault.addEventListener("click", function(){
     document.querySelector(".gallery").innerHTML = ""
     genererGallery(works)
 })
+
+// si utilisateur connecté
+const logout = document.getElementById("logout")
+if (window.sessionStorage.getItem("token") != null){
+    logout.textContent = 'logout'
+
+    logout.addEventListener("click", () =>{
+        window.sessionStorage.removeItem("token")
+    })
+}

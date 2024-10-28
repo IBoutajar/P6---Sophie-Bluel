@@ -118,6 +118,15 @@ h1{
 	color: #B1663C
 }
 
+a {
+	text-decoration: none;
+	color: black;
+}
+
+a:hover {
+	color: #B1663C
+}
+
 h1 > span {
 	font-family: 'Work Sans';
 	font-size:10px;
@@ -220,6 +229,7 @@ input[type="submit"]{
 	font-family: 'Syne';
 	font-weight: 700;
 	color: white;
+	border: none;
 	background-color: #1D6154;
 	margin : 2em auto ;
 	width: 180px;
