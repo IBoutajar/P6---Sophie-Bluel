@@ -47,6 +47,13 @@ table {
 	border-spacing: 0;
 }
 
+footer {
+	display: flex;
+    width: 100%;
+    background-color: white;
+    flex-direction: row-reverse;
+}
+
 /** Filtre **/
 
 .filtre {
@@ -84,11 +91,14 @@ table {
 
 
 /** end reset css**/
+
+
 body {
 	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: #FFFEF8;
 }
 header {
 	display: flex;
