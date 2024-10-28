@@ -64,9 +64,15 @@ btnDefault.addEventListener("click", function(){
 
 // si utilisateur connecté
 const logout = document.getElementById("logout")
+const adminMode = document.querySelector(".admin-mode")
+const edition = document.getElementById("edition")
+
 if (window.sessionStorage.getItem("token") != null){
     logout.textContent = 'logout'
+    adminMode.classList.remove("displayNone")
+    edition.classList.remove("displayNone")
 
+    // déconnexion
     logout.addEventListener("click", () =>{
         window.sessionStorage.removeItem("token")
     })

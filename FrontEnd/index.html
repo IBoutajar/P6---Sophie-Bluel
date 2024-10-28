@@ -8,12 +8,20 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<script src="https://kit.fontawesome.com/783cf2baa2.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
 	<script type="module" src="index.js" defer></script>
 </head>
 <body>
+	<div class="admin-mode displayNone">
+		<div class="admin-mode-content">
+			<i class="fa-regular fa-pen-to-square"></i>
+			Mode édition
+		</div>
+	</div>
 <header>
-	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+		<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
+		
 	<nav>
 		<ul>
 			<li><a href="./index.html">projets</a></li>
@@ -36,7 +44,13 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
+		<div class = "edition">
+			<h2>Mes Projets</h2>
+			<div class="edition__content displayNone" id ="edition">
+				<i class="fa-regular fa-pen-to-square"></i>
+				<a href="">modifier</a>
+			</div>
+		</div>
 		<div class="filtre">
 			<button class="button default">Tous</button>
 		</div>
