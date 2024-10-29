@@ -10,6 +10,7 @@
 	<meta name="description" content="">
 	<script src="https://kit.fontawesome.com/783cf2baa2.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/modale.css">
 	<script type="module" src="index.js" defer></script>
 </head>
 <body>
@@ -48,7 +49,7 @@
 			<h2>Mes Projets</h2>
 			<div class="edition__content displayNone" id ="edition">
 				<i class="fa-regular fa-pen-to-square"></i>
-				<a href="">modifier</a>
+				<a href="#" id="modifier">modifier</a>
 			</div>
 		</div>
 		<div class="filtre">
@@ -80,5 +81,35 @@
 		</ul>
 	</nav>
 </footer>
+<div class="containerModale">
+	<div class="modaleGallery">
+		<span><i class="fa-solid fa-xmark"></i></span>
+		<h2>Galerie Photo</h2>
+		<div class="modalWorks"></div>
+		<button class="btnAjouter">Ajouter une photo</button>
+	</div>
+	<div class="modaleAddPhoto">
+		<span><i class="fa-solid fa-arrow-left"></i></span>
+		<span><i class="fa-solid fa-xmark"></i></span>
+		<h2>Ajout photo</h2>
+		<p></p>
+		<form enctype="multipart/form-data" >
+			<div class="containerFile">
+				<span><i class="fa-regular fa-image"></i></span>
+				<label for="file">+ Ajouter photo</label>
+				<input type="file" name="image" id="file">
+				<img src="#" alt="Appercu image">
+				<p>jpg, png : 4mo max</p>
+			</div>
+			<div class="formBas">
+				<label for="title">Titre</label>
+				<input type="text" name="title" id="title">
+				<label for="category">Catégorie</label>
+				<select name="category" id="category"></select>
+			</div>
+			<button class="btnAjouter">Valider</button>
+		</form>
+	</div>
+</div>
 </body>
 </html>

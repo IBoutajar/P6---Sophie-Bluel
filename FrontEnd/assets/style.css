@@ -30,6 +30,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	position: relative;
 }
 ol, ul {
 	list-style: none;
@@ -131,7 +132,7 @@ footer {
 
 
 body {
-	max-width: 1140px;
+	max-width: 1440px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
@@ -140,10 +141,18 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px 0;
+	margin-left: 40px;
+    margin-right: 40px;
 }
 section {
-	margin: 50px 0
+	margin: 50px 0;
+    margin-right: 80px;
+}
+
+#portfolio {
+	margin-left: 83px;
+    margin-right: 80px;
 }
 
 h1{
@@ -232,7 +241,11 @@ li:hover {
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
+	display: flex;
+    margin: auto;
+    flex-direction: column;
+    align-items: center;
 }
 #contact > * {
 	text-align: center;

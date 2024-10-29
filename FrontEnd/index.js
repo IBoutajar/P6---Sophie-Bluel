@@ -66,6 +66,9 @@ btnDefault.addEventListener("click", function(){
 const logout = document.getElementById("logout")
 const adminMode = document.querySelector(".admin-mode")
 const edition = document.getElementById("edition")
+const modifier = document.getElementById("modifier")
+const modaleGallery = document.querySelector(".containerModale .modaleGallery")
+const modalWorks = document.querySelector(".modaleGallery .modalWorks")
 
 if (window.sessionStorage.getItem("token") != null){
     logout.textContent = 'logout'
@@ -75,5 +78,185 @@ if (window.sessionStorage.getItem("token") != null){
     // déconnexion
     logout.addEventListener("click", () =>{
         window.sessionStorage.removeItem("token")
+        
     })
 }
+
+// Affichage Modale sur click "modififer"
+
+const modaleContainer = document.querySelector(".containerModale")
+
+modifier.addEventListener("click", () =>{
+    modaleContainer.style.display = "flex"
+})
+
+// quitter la modal quand on click sur la croix
+const xmark = document.querySelector(".containerModale .fa-xmark")
+
+xmark.addEventListener("click", () =>{
+    modaleContainer.style.display = "none"
+})
+
+// quitter la modal quand on click en dehors 
+modaleContainer.addEventListener("click", (e) =>{
+    if (e.target.className === "containerModale") {
+        modaleContainer.style.display = "none"
+    }
+})
+// generer la gallery dans la modal
+async function genererModalGallery() {
+    modalWorks.innerHTML=""
+    const reponse = await fetch ('http://localhost:5678/api/works') ;
+    const works = await reponse.json() ;
+    for (let i = 0; i < works.length; i++) {
+        const figure = document.createElement("figure")
+        const img = document.createElement("img")
+        const span = document.createElement("span")
+        const trash = document.createElement("i")
+
+        trash.classList.add("fa-solid","fa-trash-can", "fa-2xs")
+        trash.id = works[i].id
+        img.src = works[i].imageUrl
+
+        span.appendChild(trash)
+        figure.appendChild(span)
+        figure.appendChild(img)
+        modalWorks.appendChild(figure)
+    }
+    deleteProject()
+    
+
+    
+}
+
+// supprimer projet 
+function deleteProject(){
+    const trashAll = document.querySelectorAll(".fa-trash-can")
+    for (let i = 0; i < trashAll.length; i++) {
+        let trash = trashAll[i]
+        trash.addEventListener("click",(e) =>{
+            let id = trash.id
+            const init = {
+                method: "DELETE",
+                headers: {
+                    "Content-type": "application/json",
+                    "Authorization": "Bearer " + window.sessionStorage.getItem("token")},
+            }
+            fetch("http://localhost:5678/api/works/"+id,init)
+            .then(response =>{
+                return response.json()
+            })
+            .then(data =>{
+                document.querySelector(".gallery").innerHTML = ""
+                genererGallery(works)
+                genererModalGallery()
+            })
+            
+        })
+        
+    }
+    
+}
+
+genererModalGallery()
+
+
+// faire apparaitre la deuxiemes modal
+const btnAjouter = document.querySelector(".modaleGallery .btnAjouter")
+const modalAddPhoto = document.querySelector(".modaleAddPhoto")
+const arrow = document.querySelector(".fa-arrow-left")
+const xmarkPhoto = document.querySelector(".modaleAddPhoto .fa-xmark")
+
+function genererModalAjout(){
+    btnAjouter.addEventListener("click",() =>{
+        modaleGallery.style.display = "none"
+        modalAddPhoto.style.display = "flex"
+    })
+
+    arrow.addEventListener("click",() =>{
+        modalAddPhoto.style.display = "none"
+        modaleGallery.style.display= "flex"
+    })
+
+    xmarkPhoto.addEventListener("click", () =>{
+        modaleContainer.style.display = "none"
+    })
+}
+
+genererModalAjout()
+
+// Faire prévisualisation
+
+const previewImg = document.querySelector(".containerFile img")
+const inputFile = document.getElementById("file")
+const labelFile = document.querySelector(".containerFile label")
+const iconeFile = document.querySelector(".containerFile .fa-image")
+const pFile = document.querySelector(".containerFile p")
+
+//Ecoute changement input file
+//previsualisation
+inputFile.addEventListener("change",() =>{
+    const file = inputFile.files[0]
+    if (file) {
+        const reader = new FileReader()
+        reader.onload = function (e){
+            previewImg.src = e.target.result
+            previewImg.style.display = "flex"
+            labelFile.style.display = "none"
+            iconeFile.style.display = "none"
+            pFile.style.display = "none"
+        }
+        reader.readAsDataURL(file)
+    }
+})
+
+
+
+//créer liste de catégories dans Select de Form
+
+async function categoriesSelect() {
+    const select = document.querySelector(".modaleAddPhoto .formBas select") ;
+    const reponseCategori = await fetch('http://localhost:5678/api/categories');
+    const categories = await reponseCategori.json();
+    for (let i = 0; i < categories.length; i++) {
+        const option = document.createElement("option")
+        option.value = categories[i].id
+        option.textContent = categories[i].name
+        select.appendChild(option)        
+    }
+}
+
+categoriesSelect()
+
+
+//ajouter une photo via POST
+
+const form = document.querySelector(".modaleAddPhoto form")
+const title = document.querySelector(".modaleAddPhoto .formBas #title")
+const category = document.querySelector(".modaleAddPhoto .formBas #category")
+const pModalPhoto = document.querySelector(".modaleAddPhoto p")
+
+
+form.addEventListener("submit",async (e) =>{
+    e.preventDefault()
+    if (title.value === '' || previewImg.src === '') {
+        pModalPhoto.textContent = "Veuillez télécharger l'image ou bien renseigné un titre avant de continuer"
+    }else{
+
+        const formdata = new FormData(form);
+        fetch("http://localhost:5678/api/works",{
+            method:"POST",
+            body:formdata,
+            headers:{
+                "Authorization": "Bearer " + window.sessionStorage.getItem("token")
+            }
+        })
+        .then(response => response.json())
+        .then(data =>{
+            document.querySelector(".gallery").innerHTML = ""
+            genererGallery(works)
+            genererModalGallery()
+    
+        })
+    }
+})

@@ -1,0 +1,226 @@
+.containerModale {
+    display: none;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    top: 0;
+    left: 0;
+}
+
+
+/* modaleGallery */
+.containerModale .modaleGallery{
+    background-color: #FFFFFF;
+    position: relative;
+    display: flex; /* anulation de la marche de manoeuvre */
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    height: 80%;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.modaleGallery .fa-xmark {
+    position: absolute;
+    cursor: pointer;
+    top: 20px;
+    right: 26px;
+}
+
+.modaleGallery h2 {
+    font-family: Work Sans;
+    color: black;
+    font-weight: 400;
+}
+
+.modaleGallery .btnAjouter {
+    border-radius: 60px;
+    border: none;
+    color: white;
+    font-family: Syne;
+    width: 190px;
+    background-color: #1D6154;
+    height: 36px;
+    cursor: pointer;
+}
+
+.btnAjouter:hover {
+    background-color: #0E2F28;
+}
+
+/****** Modal Works *****/
+
+.modaleGallery .modalWorks {
+    display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    width: 80%;
+    height: 60%;
+    gap: 10px;
+    padding-bottom: 50px;
+    border-bottom: #B3B3B3 1px solid;
+    overflow: auto;
+    justify-items: center;
+    align-items: center
+}
+
+.modalWorks figure {
+    position: relative;
+}
+
+.modalWorks img {
+    object-fit: scale-down;
+    width: 100%;
+    height: 80%;
+}
+
+.modalWorks .fa-trash-can {
+    color: white;
+}
+
+.modalWorks span{
+    position:absolute ;
+    display: flex;
+    top: 5px;
+    width: 15px;
+    height: 16px;
+    background-color: black;
+    right: 5px;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* modale Ajouter Photo */
+
+.modaleAddPhoto .btnAjouter{
+    border-radius: 60px;
+    border: none;
+    margin: auto;
+    color: white;
+    font-family: Syne;
+    width: 190px;
+    background-color: #1D6154;
+    height: 36px;
+    cursor: pointer;
+}
+
+.btnAjouter:hover {
+    background-color: #0E2F28;
+}
+
+.modaleAddPhoto {
+    display: none;
+    position: relative;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    width: 50%;
+    height: 80%;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #FFFFFF;
+}
+
+.modaleAddPhoto p {
+    color: red;
+}
+
+.modaleAddPhoto .fa-arrow-left{
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+}
+
+.modaleAddPhoto .fa-xmark{
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+}
+/* Formulaire envoie photo */
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 60%;
+    height: 80%;
+    gap: 10px;
+}
+
+form .formBas{
+    display: flex;
+    gap: 10px;
+    height: 40%;
+    border-bottom: 1px #B3B3B3 solid;
+    flex-direction: column;
+}
+
+.formBas input, select {
+    border: none;
+    height: 40px;
+    box-shadow: 0px 4px 14px 0px #00000017;
+
+}
+
+form .containerFile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #E8F1F6;
+    border-radius: 3px;
+    height: 30% ;
+    gap: 10pxt;
+}
+
+form label {
+    color: #3D3D3D;
+    font-family: Work Sans;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+
+
+
+/* container file */
+.containerFile label{
+    background-color: #CBD6DC;
+    border-radius: 50px;
+    height: 30px;
+    width: 157px;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #306685;
+    font-family: Work Sans;
+    font-weight: 500;
+}
+
+.containerFile input{
+    display: none;
+}
+
+.containerFile p{
+    font-family: Work Sans;
+    font-size: 10px;
+    color: #444444;
+}
+
+.containerFile .fa-image{
+    color: #B9C5CC;
+    font-size: 50px;
+}
+
+.containerFile img{
+    display: none;
+    max-width: 100%;
+    max-height: 100%;
+}
