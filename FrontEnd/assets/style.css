@@ -32,6 +32,12 @@ body {
 	line-height: 1;
 	position: relative;
 }
+
+main {
+	margin-left: 50px;
+    margin-right: 50px;
+}
+
 ol, ul {
 	list-style: none;
 }
@@ -142,8 +148,8 @@ header {
 	display: flex;
 	justify-content: space-between;
 	margin: 50px 0;
-	margin-left: 40px;
-    margin-right: 40px;
+	margin-left: 75px;
+    margin-right: 75px;
 }
 section {
 	margin: 50px 0;
@@ -151,8 +157,8 @@ section {
 }
 
 #portfolio {
-	margin-left: 83px;
-    margin-right: 80px;
+	margin-left: 150px;
+    margin-right: 150px;
 }
 
 h1{
@@ -170,7 +176,9 @@ a {
 }
 
 a:hover {
-	color: #B1663C
+	color: black;
+	cursor: pointer;
+	font-weight: 700;
 }
 
 h1 > span {
@@ -202,10 +210,14 @@ li:hover {
 }
 #introduction {
 	display: flex;
+	width: 90%;
+	padding-top: 40px;
+    margin: auto;
 	align-items: center;
 }
 #introduction figure {
-	flex: 1
+	display: flex;
+    width: 105%;
 }
 #introduction img {
 	display: block;
@@ -214,7 +226,11 @@ li:hover {
 }
 
 #introduction article {
-	flex: 1
+	
+	display: flex;
+	width: 63%;
+	flex-direction: column;
+	gap: 10px;
 }
 #introduction h2 {
 	margin-bottom: 1em;

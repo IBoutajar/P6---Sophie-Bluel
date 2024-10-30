@@ -58,10 +58,10 @@
 .modaleGallery .modalWorks {
     display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    width: 80%;
+    width: 64%;
     height: 60%;
     gap: 10px;
-    padding-bottom: 50px;
+    padding-bottom: 70px;
     border-bottom: #B3B3B3 1px solid;
     overflow: auto;
     justify-items: center;
@@ -109,6 +109,18 @@
     cursor: pointer;
 }
 
+.modaleAddPhoto .btnAjouterGris {
+    background-color: #A7A7A7;
+    height: 36px;
+    cursor: pointer;
+    border-radius: 60px;
+    border: none;
+    margin: auto;
+    color: white;
+    font-family: Syne;
+    width: 190px;
+}
+
 .btnAjouter:hover {
     background-color: #0E2F28;
 }
@@ -128,6 +140,12 @@
 
 .modaleAddPhoto p {
     color: red;
+}
+
+.modaleAddPhoto h2 {
+    font-family: Work Sans;
+    font-weight: 400;
+    color: black;
 }
 
 .modaleAddPhoto .fa-arrow-left{
@@ -163,7 +181,7 @@ form .formBas{
 
 .formBas input, select {
     border: none;
-    height: 40px;
+    height: 50px;
     box-shadow: 0px 4px 14px 0px #00000017;
 
 }

@@ -1,12 +1,17 @@
 // Variable //
+
+
+
 const reponse = await fetch ('http://localhost:5678/api/works') ;
 const works = await reponse.json() ;
+
+
 
 const reponseCategori = await fetch('http://localhost:5678/api/categories');
 const categories = await reponseCategori.json();
 
 function genererGallery(works) {
-
+    
     for (let i = 0; i < works.length; i++) {
         
         const photo = works[i];
@@ -124,17 +129,18 @@ async function genererModalGallery() {
         modalWorks.appendChild(figure)
     }
     deleteProject()
+    console.log(works);
     
 
     
 }
 
 // supprimer projet 
-function deleteProject(){
+async function deleteProject(){
     const trashAll = document.querySelectorAll(".fa-trash-can")
     for (let i = 0; i < trashAll.length; i++) {
         let trash = trashAll[i]
-        trash.addEventListener("click",(e) =>{
+        trash.addEventListener("click",async (e) =>{
             let id = trash.id
             const init = {
                 method: "DELETE",
@@ -143,18 +149,23 @@ function deleteProject(){
                     "Authorization": "Bearer " + window.sessionStorage.getItem("token")},
             }
             fetch("http://localhost:5678/api/works/"+id,init)
-            .then(response =>{
-                return response.json()
-            })
-            .then(data =>{
+           
+                const reponse = await fetch ('http://localhost:5678/api/works') ;
+                const works = await reponse.json() ;
+                
+                
+                genererModalGallery()
+
+
                 document.querySelector(".gallery").innerHTML = ""
                 genererGallery(works)
-                genererModalGallery()
-            })
+            
+                
             
         })
         
     }
+    
     
 }
 
@@ -235,28 +246,71 @@ const form = document.querySelector(".modaleAddPhoto form")
 const title = document.querySelector(".modaleAddPhoto .formBas #title")
 const category = document.querySelector(".modaleAddPhoto .formBas #category")
 const pModalPhoto = document.querySelector(".modaleAddPhoto p")
+const btnAjouterValide = document.querySelector("form button")
+
+console.log(btnAjouterValide);
 
 
-form.addEventListener("submit",async (e) =>{
-    e.preventDefault()
-    if (title.value === '' || previewImg.src === '') {
-        pModalPhoto.textContent = "Veuillez télécharger l'image ou bien renseigné un titre avant de continuer"
-    }else{
-
-        const formdata = new FormData(form);
-        fetch("http://localhost:5678/api/works",{
-            method:"POST",
-            body:formdata,
-            headers:{
-                "Authorization": "Bearer " + window.sessionStorage.getItem("token")
-            }
-        })
-        .then(response => response.json())
-        .then(data =>{
-            document.querySelector(".gallery").innerHTML = ""
-            genererGallery(works)
-            genererModalGallery()
+async function addPhoto() {
     
-        })
+    form.addEventListener("submit",async (e) =>{
+        e.preventDefault()
+        if (title.value === '' || previewImg.src === '') {
+            pModalPhoto.textContent = "Veuillez télécharger l'image ou bien renseigné un titre avant de continuer"
+        }else{
+            btnAjouter.classList.add("btnAjouterVerif")
+            const formdata = new FormData(form);
+            await fetch("http://localhost:5678/api/works",{
+                method:"POST",
+                body:formdata,
+                headers:{
+                    "Authorization": "Bearer " + window.sessionStorage.getItem("token")
+                }
+                
+            })
+                const reponse = await fetch ('http://localhost:5678/api/works') ;
+                const works = await reponse.json() ;
+                document.querySelector(".gallery").innerHTML = ""
+                genererGallery(works)
+                console.log(works);
+                
+            
+        }
+    
+        genererModalGallery()
+        title.value = ''
+        previewImg.src = ''
+        previewImg.style.display = "none"
+        labelFile.style.display = "flex"
+        iconeFile.style.display = "flex"
+        pFile.style.display = "flex"
+
+        
+        
+    })
+}
+
+addPhoto()
+
+        
+function VerifForm() {
+   form.addEventListener("input",() => {
+    if (title.value !== '' && previewImg.src !== '' && categories.value !== '') {
+        console.log("AHA");
+        btnAjouterValide.classList.add("btnAjouter")
+        btnAjouterValide.classList.remove("btnAjouterGris")
+        btnAjouterValide.disabled = false
+        
+    } else {
+        console.log("BABA");
+        
+        btnAjouterValide.classList.add("btnAjouterGris")
+        btnAjouterValide.classList.remove("btnAjouter")
+        btnAjouterValide.disabled = true
     }
-})
+   })
+    
+}
+
+VerifForm()
+
