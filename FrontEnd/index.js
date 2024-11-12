@@ -297,13 +297,11 @@ addPhoto()
 function VerifForm() {
    form.addEventListener("input",() => {
     if (title.value !== '' && previewImg.src !== '' && categories.value !== '') {
-        console.log("AHA");
         btnAjouterValide.classList.add("btnAjouter")
         btnAjouterValide.classList.remove("btnAjouterGris")
         btnAjouterValide.disabled = false
         
     } else {
-        console.log("BABA");
         
         btnAjouterValide.classList.add("btnAjouterGris")
         btnAjouterValide.classList.remove("btnAjouter")
