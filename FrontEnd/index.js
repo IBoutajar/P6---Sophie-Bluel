@@ -228,8 +228,7 @@ inputFile.addEventListener("change",() =>{
 
 async function categoriesSelect() {
     const select = document.querySelector(".modaleAddPhoto .formBas select") ;
-    const reponseCategori = await fetch('http://localhost:5678/api/categories');
-    const categories = await reponseCategori.json();
+    
     for (let i = 0; i < categories.length; i++) {
         const option = document.createElement("option")
         option.value = categories[i].id
