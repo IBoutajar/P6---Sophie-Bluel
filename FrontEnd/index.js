@@ -3,7 +3,7 @@
 
 
 const reponse = await fetch ('http://localhost:5678/api/works') ;
-const works = await reponse.json() ;
+let works = await reponse.json() ;
 
 
 
@@ -129,7 +129,6 @@ async function genererModalGallery() {
         modalWorks.appendChild(figure)
     }
     deleteProject()
-    console.log(works);
     
 
     
@@ -148,17 +147,19 @@ async function deleteProject(){
                     "Content-type": "application/json",
                     "Authorization": "Bearer " + window.sessionStorage.getItem("token")},
             }
-            fetch("http://localhost:5678/api/works/"+id,init)
+            await fetch("http://localhost:5678/api/works/"+id,init)
            
-                const reponse = await fetch ('http://localhost:5678/api/works') ;
-                const works = await reponse.json() ;
+                const worksDelete = works.filter(function(works){
+                    return works.id != id
+                });
                 
                 
                 genererModalGallery()
 
 
                 document.querySelector(".gallery").innerHTML = ""
-                genererGallery(works)
+                genererGallery(worksDelete)
+                
             
                 
             
@@ -248,7 +249,7 @@ const category = document.querySelector(".modaleAddPhoto .formBas #category")
 const pModalPhoto = document.querySelector(".modaleAddPhoto p")
 const btnAjouterValide = document.querySelector("form button")
 
-console.log(btnAjouterValide);
+
 
 
 async function addPhoto() {
